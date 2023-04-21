@@ -4,6 +4,7 @@ For documentation, see [Linux terminal documentation](https://linuxcommand.org/l
 
 * `whoami` - prints the id of the current user (the id is also visible as the first part of the prompt)
 * `ctrl + c` - terminates the running process
+* `ctrl + r` - start reverse command history, hitting it again will go one step back in history
 * `clear` - clears the current screen
 * `du` - **disk usage** - print disk usage of a directory, if no directory path is given, shows disk usage of the working directory
 * * `-h`, `---human-readable`- flag to print sizes in human readable format (e.g., 1K 234M 2G)

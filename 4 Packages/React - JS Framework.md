@@ -111,7 +111,7 @@ export function MyComp({classes, children}: { classes: string; children: string 
 }
 ```
 
-In the `App.tsx`:
+Passing the props to the component in `App.tsx`:
 
 ```tsx
 
@@ -127,3 +127,65 @@ function App() {
 ```
 
 >[!TIP] Note that all arguments are passed as pseudo-HTML attributes, except the named `children` argument, which is passed as the text content of the pseudo-HTML element.
+
+## Destructuring props when passing as props
+
+When passing `props` to a component or an HTML element, the props can be simply passed as a destructured object using the spread operator `...` 
+All properties of `props` will be passed that way. If there are any properties that are not accepted by the component they are being passed to, they will simply be ignored.  
+
+```tsx
+function Button(props) {
+	return (
+		<button
+			name={props.name}
+			{...props} // all props are passed, those that are not accepted by the button element simply get ignored
+		>
+			{props.children}
+		</button>
+	);
+}
+```
+
+## Typing the props
+
+The props can be typed by using the premade React props types, such as `React.ButtonHTMLAttributes<HTMLButtonElement>`. This type already has all the properties defined that are available for button elements, such as `name`, `type`, `className`, `childern` etc.
+
+```tsx
+function Button(props:React.ButtonHTMLAttributes<HTMLButtonElement>) {
+	return (
+		<button>
+			{props.children}
+		</button>
+	);
+}
+```
+
+The premade Ract prop types can be easily extended to accommodate for any additional props we want to define:
+
+```tsx
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	variant: string;
+}
+function Button(props:ButtonProps) {
+	return (
+		<button className={props.variant==="primary" ? `bg-red-500` : "bg-blue-300"}>
+			{props.children}
+		</button>
+	);
+}
+```
+
+With destructured props:
+
+```tsx
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	variant?: string;
+}
+function Button({variant="primary", ...props}:ButtonProps) {
+	return (
+		<button className={variant==="primary" ? `bg-red-500` : "bg-blue-300"}>
+			{children}
+		</button>
+	);
+}
+```

@@ -15,7 +15,9 @@ npm install react-router-dom localforage match-sorter sort-by
 
 # Using the React Router
 
-## `BrowserRouter` wrapper component
+## Method A: `BrowserRouter` wrapper, `Routes` and `Route` components
+
+### `BrowserRouter` wrapper component
 
 In order to use to router, the `App` component must be wrapped in a `BrowserRouter` component.
 
@@ -36,7 +38,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 );
 ```
 
-## `Routes` and `Route` components
+### `Routes` and `Route` components
 
 The routing is done by specifying the `Route` tags, wrapped within a `Routes` wrapper. The `Route` tags will generate the page specified in the `element` prop when the page URL is equivalent to the `path` prop. Each page should be a separate component.
 The header and the footer can be placed in the `App` component, outside of the pages.
@@ -68,6 +70,91 @@ function App() {
 }
 
 export default App;
+```
+
+
+## Method B: `createBrowserRouter` and `RouterProvider`
+
+The routes can also be defined in the router object. The router object is created by binding the return value of the `createBrowserRouter` function. `createBrowserRouter` has a single parameter:
+- an array of objects which are the individual routes
+
+The router can be then used by using the `RouterProvider` component with the `router` property containing our newly created router object.
+
+In `main.tsx`:
+```tsx
+import { RouterProvider, createBrowserRouter} from 'react-router-dom';
+
+export const router = createBrowserRouter([
+	{
+		path: '/login',
+		element: <LoginPage />,
+	},
+	{
+		path: '/about',
+		element: <AboutUs />
+	}
+]);
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>
+);
+```
+
+>[!NOTE] The `App` component is not necessary in this example, as the pages get loaded directly by the router.
+
+## `Outlet` element and layout components
+
+In order to define which routes will render some reusable layout components, such as headers and footers, the `Outlet` component and nested routes within the `children` property can be used.
+
+In `main.tsx` (defining the `children` property on a layout element):
+```tsx
+import { RouterProvider, createBrowserRouter} from 'react-router-dom';
+
+export const router = createBrowserRouter([
+	{
+		path: '/login',
+		element: <LoginPage />,
+	},
+	{
+		path: '/',
+		element: <NavigationLayout />,
+		children:[ // holds all the components to be rendered inside of the specified element
+			{
+				index:true, // same as path: "/", specifies the default child to be rendered
+				element: <Home />,
+			},
+			{
+				path:'/about',
+				element: <AboutUs />
+			},
+			{
+				path:'/contact',
+				element: <Contact />
+			}
+		]
+	}
+]);
+
+```
+
+in `NavigationLayout.tsx` (using the `Outlet` component as a placeholder for the children components):
+
+```tsx
+import { Outlet } from 'react-router-dom';
+
+function NavigationLayout(){
+	return(
+		<>
+			<header>
+				<h1>Header</h1>
+			</header>
+			<main>
+				<Outlet /> // the element defined in the children property will be rendered in place of the Outlet component
+			</main>
+		</>	
+	);
+}
 ```
 
 ## Navigating to a new URL
