@@ -14,6 +14,20 @@ On my MacBook, the paths for the configuration files are:
  - __global__: /Users/mora/.gitconfig (~/.gitconfig)
  - __system__: /Library/Developer/CommandLineTools/usr/share/git-core/gitconfig
 
+# SSH key caching
+
+I cached the SSH key for GitHub on Mac by using the following commands:
+
+```bash
+eval $(ssh-agent)
+```
+
+```bash
+ssh-add --apple-use-keychain 
+```
+
+I am no longer prompted to enter the SSH key.
+
 # Git commands
 
 >[!INFO] All Git commands are called **within the working directory**
@@ -33,33 +47,55 @@ On my MacBook, the paths for the configuration files are:
 * `git status` - shows the current branch, its status and the status of the items in it
 * `-help` - shows help for the command
 * `git log` - shows the history of all commits
-* `git clone 'SSH depository code'` - creates a local clone of the online repo
 
 ## Updating commands
 
-* `git add 'filename'` - adds the specified directories or files into the staging area
-* `git add .`  - adds all non-ignored directories and files from the current directory into the staging area
+* `git add 'filename'` - adds the specified directories or files into the staging area, tracking the files if they are untracked
+* -  `git add .`  - stages all non-ignored directories and files in the current directory
 
 * `git commit -m 'commit message'` - commits to the local directory with the message as identifier
-* `git commit -am 'commit message'` - adds and commits to the local directory with the message as identifier, note that it doesn't work on newly created files!
+* -  `-a`,`--all` - stages all currently tracked files before commiting
 
-* `git push -u origin 'branchname'` - pushes the commited local repository upstream into the specified repository (in this case *origin*) into the specified branch (eg. *main*)
-* `git pull` - updates the local branch to the status of the remote branch
+* `git push 'remote' 'branchname'` - pushes the current local branch into the specified branch (eg. *main*) in the remote repo (eg *origin*)
+* - `git push` - pushes the current local branch into the default remote repo
+* - `-u`, `--set-upstream` - saves the specified remote repo as the default remote repo
+* - `-d`,`--delete` - deletes the specified branch from the remote server
+
+- `git fetch 'remote' 'branchname'` - downloads the specified remote branch and all of its commits and data
+- - `git fetch` - fetches the remote branch the current branch is tracking 
+* `git pull 'remote' 'branchname'` - downloads the specified remote branch and all of its commits and data, then merges it into the current local branch
+* - `git pull` - pulls from the remote branch the current branch is tracking
+- `git rm <filename>`  - removes the file from the working tree and the index
+	- `--cache` - unstages and untracks the file without removing the file from the working tree
 
 ## Branching commands
 
-* `git branch` - shows all the local branches and highlights the one we are on
+* `git branch` - shows all the local branches and highlights the current one (the one that HEAD points to)
  * * `-r` - shows all the remote branches 
- * * `-a` - shows all local and remote branches
+ * * `-a`, `--all` - shows all local and remote branches
+ * * `-v`,  `--verbose` - shows the SHA1 and message for the last commit on each branch
+ * * `-vv`,  `--verbose --verbose` - same as `-v` but includes the remote branches for the local tracking branches
+ * * `--merged` - shows only the branches merged into the current branch or the branch specified by name
+ * * `--no-merged` - shows only the branches not merged into the current branch or the branch specified by name
+* * `-d`, `--delete` - deletes the specified branch
+* * `-D`, `--delete --force`- deletes the specified branch, regardless of its merge status
+ * * `git branch 'branchname'` - creates a new local branch from the current branch
+- `git switch 'branch name'` - switches to the specified local branch
+- - `-c`, `--create` - creates the new branch before switching to it
+*  `git checkout 'branch name'` - switches to the specified local branch, if the branch does not exist but a remote branch with the same name exists, creates a new tracking branch before switching to it
+* - `-b` - creates the new branch before switching to it
+* - `git checkout --track origin/my-branch-name` - adds the remote branch to the list of local branches
 
-* `git branch 'branchname'` - creates a new branch with the name specified
-* `git checkout 'branch name'` or `git switch 'branch name'` - switches to the specified branch
-* `git checkout --track origin/my-branch-name` - adds the remote branch to the list of local branches
-* `git remote update` + `git status` - shows if the local branch is up to date with the remote branch
+## Remote commands
 
-### Deleting branches
+* `git clone 'SSH depository code'` - creates a local clone of the online repo
+- `git remote add 'remote' 'remote-url'` - adds a remote repository reference from a remote server, eg `git remote add origin git@github.com:devhausleipzigacademy/camp9-midterm.git`
+- `git remote update` - downloads all remote branches and all of their commits and data
+-  `git remote prune origin` - deletes all remote branches which no longer exist on the remote server
+- - `-n`, `--dry-run` - only displays which branches would be deleted, without actually deleting anything
 
-* `git branch -d 'branchname'` - locally deletes the branch with the specified name
-* `git branch -D 'branchname'` - locally deletes the branch with the specified name (regardless of content)
-* `git push origin --delete 'branchname'` - deletes the branch with the specified name from the online repository
-* `git prune -p` - removes deleted remote files from showing up in the remote branch display
+## Pruning (removing *stale* references)
+
+* `git prune` - deletes all unreachable local references
+* * - `-n`, `--dry-run` - only displays which branches would be deleted, without actually deleting anything
+
