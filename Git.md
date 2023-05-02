@@ -79,6 +79,7 @@ I am no longer prompted to enter the SSH key.
  * * `--no-merged` - shows only the branches not merged into the current branch or the branch specified by name
 * * `-d`, `--delete` - deletes the specified branch
 * * `-D`, `--delete --force`- deletes the specified branch, regardless of its merge status
+ * * `-m` - rename the branch
  * * `git branch 'branchname'` - creates a new local branch from the current branch
 - `git switch 'branch name'` - switches to the specified local branch
 - - `-c`, `--create` - creates the new branch before switching to it

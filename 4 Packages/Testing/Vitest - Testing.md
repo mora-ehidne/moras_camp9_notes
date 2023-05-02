@@ -1,5 +1,12 @@
 The *AAA* (Arrange-Act-Assert) pattern is what is a industry standard in testing. 
 
+# Other testing framworks
+
+- mocha
+- jest
+- jasmine
+- react testing library
+
 # Vitest
 
 We are using [Vitest](https://vitest.dev/) for testing. 
@@ -112,3 +119,4 @@ If the arguments are objects, `toEqual()` will compare the structure of the obje
 ```ts
 expect(result).not.toBe(6); // passes the test if result is anything except 6
 ```
+## `t.is()`

@@ -84,6 +84,16 @@ For documentation, see [Linux terminal documentation](https://linuxcommand.org/l
 
 * `pnpm` - package manager that sets up the node packages globally, with only references in the local project directory
 
+### vim
+
+docs: https://vim.rtorr.com/
+- `vimtutor` - tutorial for vim
+- `:w` - write (save) the file
+- `:q` - quit the file (fails if any unsaved changes exist)
+- `:q!`, `ZQ` - force quit with unsaved changes 
+-  `:wq`, `:x`, `ZZ` - write (save) and quit
+- `Esc` - exit insert mode
+
 
 
 ### Git commands

@@ -35,7 +35,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 ```
 
 
-
 # Hooks
 
 ## `useQueryClient` hook
@@ -123,3 +122,20 @@ function BlogList(){
 ```
 
 >[!INFO] The `mutate()` method has to be called in order for the `useMutation` hook to have any effect.
+
+# Caching 
+
+TanStack Query caches successful fetch requests. This enables saving data from fetch requests even when moving between components (components get unmounted) and not doing any unnecessary fetch requests.
+
+Cached data has two important variables:
+1. Cache time - property `cacheTime` - how long the data stays cached (data gets deleted from the cache after this time) - default value is __5 minutes__
+2. Stale time - property `staleTime` - how long the data stays *fresh* (data becomes *stale* after this time) - default value is __0 minutes__
+
+A TanStack useQuery hook refetches stale data automatically in the background when:
+  -   New instances of the query mount
+  -   The window is refocused
+  -   The network is reconnected
+  -   On a refetch interval
+
+Cached data has a `stale time`, which is the time after which the data will be refetched.
+Fetch requests that are cached are displayed as `fresh` in the [[TanStack Query Devtools]], and those that are 
