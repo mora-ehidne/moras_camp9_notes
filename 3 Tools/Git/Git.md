@@ -81,9 +81,9 @@ There are three types of branches:
    It acts as a copy of the remote branch it is tracking that gets updated via `fetch` and `remote update` commands. Its name takes the form of `<remote>/<branch>` (eg. `origin/main`). It is created by a `fetch` or a `remote update` command.
 	All remote-tracking branches are in the directory `.git/refs/remotes/origin`.   
 >
-3. __remote branch__ - branch in the remote repository. Cannot be moved but can be updated via the `push` command from the local tracking branch. It is created remotely or by being pushed from a local branch.
+3. __remote branch__ - branch in the remote repository. Cannot be moved but can be updated via the `push` command from the local tracking branch. It is created remotely or by being pushed from a local branch. Only exists in the remote repository - its local mirror image is the remote-tracking branch.
 
->[!TIP] To see all the branches in the local repo, including the connections between the tracking branches and remote-tracking branches, use the command `git branch -avv`.
+>[!TIP] To see all the branches in the local repo, including the connections between the local tracking and remote-tracking branches, use the command `git branch -avv`.
 
 >[!WARNING] The naming used for remote-tracking and remote branches can vary:
 > - **remote-tracking branches** are sometimes referred to as _remote branches_
@@ -91,20 +91,22 @@ There are three types of branches:
 
 ### Tracking branches
 
-A local branch can be set up as a tracking branch in different ways:
-- via 
+A local branch can be set up as a tracking branch via different commands, such as:
+- by checking out a branch whose name matches one of the remote-tracking branches, eg. `git checkout mybranch` if there is a remote-tracking branch called `origin/mybranch`
+- by using the `-u`/`--upstream` flag on a `push`, `fetch` or `pull` command
 
 A tracking branch can perform:
-- a `push` to directly update the remote branch (note that this command does not automatically update the remote-tracking branch too!). 
+- a `push` to directly update the remote branch (note that this command does not automatically update the remote-tracking branch!). 
 	- `git push origin main`
-- a `fetch` to update the remote-tracking branch to the state of its remote branch
+- a `fetch`  to download all the data related to the remote branch from the remote repository and to update the remote-tracking branch to the state of its remote branch
 	- `git fetch origin main`
-- a `merge` to update itself to the state of the remote-tracking branch
+- a `merge` to update itself to the state of the remote-tracking branch (also doable with similiar commands such as cherry-pick or rebase)
 	- `git merge origin main`
 
->[!WARNING] The `pull` command does first a `fetch` to update the remote-tracking branch and then a `merge` to update the local branch.
+>[!WARNING] The `pull` command first performs a `fetch` and then a `merge` command.
 
->[!NOTE]  Both the `git remote update` and `git fetch origin` commands update ALL the remote-tracking branches and download all the remote commits, files and refs.
+>[!NOTE]  The `git remote update` and `git fetch origin` commands:
+> both download ALL the relevant data from the remote repo and update ALL the remote-tracking branches. They also create remote-tracking branches for ALL remote branches whose remote-tracking counterparts still do not exist.
 
 
 ## HEAD
