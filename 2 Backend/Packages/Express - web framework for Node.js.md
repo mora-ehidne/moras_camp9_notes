@@ -2,6 +2,8 @@ homepage: https://expressjs.com/
 
 # Setup
 
+All of the backend setup was done in a `backend` folder, independently of the `frontend` or `client` folder.
+
 `pnpm init` - pnpm initialization (creates the `package.json` file)
 `pnpm install express` - express server installation
 `pnpm install -D ts-node` - Node.js installation (TypeScript versionß)
@@ -14,8 +16,8 @@ homepage: https://expressjs.com/
 We created `tsconfig.json`.
 We created a `src` folder and `main.ts` inside of it.
 
-Inside of `package.json` we createad a script:
-`dev: `
+Inside of `package.json` we created a script to be able to run the nodemon live server with the `pnpm dev` command:
+`"dev": "nodemon ./src/main.ts"`
 
 >[!TIP] Node.js diverts all console.log output into the terminal.
 
@@ -26,21 +28,24 @@ In `main.ts`:
 import express from "express";
 
 const app=express(); // server object binding
-app.listen();
 ```
+
+>[!NOTE] The Express backend server will reject all frontend HTTP requests if no origin is defined in the `app.use` method.
 
 # The `.env` file
 
-In the `.env` file we can place the number of the server port.
+In the `.env` file we can place the number of the backend and frontend server port.
 ```js
-PORT="http://localhost:8080"
+BACKEND_SERVER="8000"
+FRONTEND_SERVER="http://localhost:5173"
 ```
 
 in `main.ts`:
 ```ts
 import dotenv from 'dotenv';
 dotenv.config(); // has to be done once before accessing the .env file
-const port = process.env.PORT; // bind the PORT variable from the .env file
+const port = process.env.BACKEND_SERVER; // bind the BACKEND_SERVER variable from the .env file
+app.use(cors({origin:process.env.FRONTEND_SERVER})); // 
 ```
 
 # Express methods
@@ -57,7 +62,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app=express();
-const PORT = process.env.PORT || 8080; // use the port number from the .env file or 8080 if no PORT variable found in the .env file
+const PORT = process.env.PORT || 8000; // use the port number from the .env file or 8080 if no PORT variable found in the .env file
 
 // manually define the port
 app.listen(8080, ()=>{
@@ -86,8 +91,8 @@ All the Express HTTP handler methods have two parameters:
 
 ### `use()`
 
-The `use()` method triggers on any HTTP request that matches the given URL.
-Such functions are also called _middleware_.
+The `use()` method triggers on any HTTP request that matches the given URL. It is generally used to run code that is being applied to all HTTP handler methods.
+Functions that run before other HTTP handler methods are also called _middleware_.
 
 ```ts
 app.use('/', (req, res, next)=>{
@@ -100,6 +105,7 @@ app.use((req, res, next)=>{
 });
 app.use(express.json({limit:'1mb'})); // parse all HTTP requests as JSON, limit the size of the HTTP request body to a maximum of 1 megabyte
 // note that calling the express.json method calls the `next` method on its own
+app.use(cors({origin:"localhost:5173"})); // accept all HTTP requests from the specified URL, in this case our localhost Vite server
 ```
 
 ### `get()`
@@ -139,36 +145,36 @@ app.delete('/', (req, res, next)=>{
 # Routing
 
 Specific URLs can be routed to specific files that handle HTTP requests to those URLs.
-inside of the `src` folder, we created a `routes` folder and inside it, a `user.routes.ts` file.
+inside of the `src` folder, we created a `routes` folder and inside it, a `user.routes.ts` file. A router function can be passed as the callback function of a HTTP request handler, such as the `use()` method.
 
 inside `user.routes.ts`:
 ```ts
 import {Router} from 'express';
 
-const router=Router();
+const userRouter=Router();
 
 //@route POST /api/1.0/user/signup
 //@desc Register user
 //@access Public
 
-router.post('/signup',(req, res, next)=>{
+userRouter.post('/signup',(req, res, next)=>{
 	res.send("singup"); // sends the string signup to the client
 });
 
-export default router;
+export default userRouter;
 ```
 
 inside `main.ts`:
 ```ts
 import userRouter from '/routes/user.routes';
 
-app.use('/app/1.0/', userRouter)
+app.use('/app/1.0/user', userRouter); // use the userRouter on all HTTP requests that target the /app/1.0/user path
 
 ```
 
 ## Controllers
 
-The controllers funcitons that are called by the HTTP requests.
+The controller functions handle the logic of HTTP request handlers. They are passed as callback functions to Express HTTP request handlers.
 
 inside of the `src` folder, we created a `controllers` folder and inside it, a `user.contollers.ts` file.
 

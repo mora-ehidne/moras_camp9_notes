@@ -202,7 +202,7 @@ return (<></>);
 }
 ```
 
-## Dynamic Segments
+## Dynamic Segments (params)
 
 Segments of the URL specified in the `path` prop can be dynamic, meaning that they act as a wildcard that accepts all matching URLs that do not match a more specific `Route` path.
 The dynamic segment starts with a colon `:`.

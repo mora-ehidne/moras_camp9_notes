@@ -99,3 +99,11 @@ const mySchema = z.string(); // defines that the passed data must be a string
 const result = mySchema.parse(12); // zod will throw an error as 12 is not a string
 const result = mySchema.safeParse(12); // zod does not throw an error but returns {success:false, error}
 ```
+
+# creating types based on schemas
+
+To insure type safety, the `infer()` method can be used to create a TypeScript type based on the structure of a schema object.
+
+```ts
+export type myType = z.infer<typeof mySchema>;
+```

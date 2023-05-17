@@ -92,6 +92,7 @@ docs: https://vim.rtorr.com/
 - `:q` - quit the file (fails if any unsaved changes exist)
 - `:q!`, `ZQ` - force quit with unsaved changes 
 -  `:wq`, `:x`, `ZZ` - write (save) and quit
+- `i` - enter insert mode
 - `Esc` - exit insert mode
 
 

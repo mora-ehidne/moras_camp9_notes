@@ -6,6 +6,9 @@ Entering a URL in the address bar of a browser performs a GET request.
 
 ## POST
 ## PATCH
+
+Updates one or more fields of a data entity.
+
 ## DELETE
 
 # HTTP response status codes
@@ -22,5 +25,6 @@ Types of responses with some examples:
 4. Client error responses 400-499
 	- __400 Bad Request__ - client error
 	- __404 Not Found__ - URL not found, server cannot find the resource
-5. Server error responses 500-599
+	- **422 Unprocessable Content** - eg. when a non-unique email address is POSTed
+1. Server error responses 500-599
 	- __500 Internal Server Error__ - generic server error status
