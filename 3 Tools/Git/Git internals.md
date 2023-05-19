@@ -80,6 +80,13 @@ Types of refs:
 
 All Git commands that target a specific commit can also be used by specifying a ref, as a ref can always be resolved into a commit (eg. branch `main` pointing to the commit `a2af` resolves in commit `a2af`, HEAD pointing to `main` pointing to to the commit `55ha` resolves in commit `55ha` etc.)
 
+>[!INFO] Unreachable objects / orphaned objects / loose objects / dangling objects
+> All these terms refer to the same thing: objects (blobs, tree, commits) that no refs are pointing to and which are not ancestors of an object a ref is pointing to. Unreachable objects cannot be found through a ref or by following a commit inheritance tree upward from a ref.
+> 
+> Unreachable objects get deleted on _garbage collection_. Garbage collection can be invoked manually through the command `gc` and its child command `prune`, but is also run automatically after a `fetch`, `merge`, `rebase` and `commit` commands.
+> 
+> Note that the `gc` command runs the `prune` command, but also `repack`, `pack` and `rerere` commands, which also compress Git data in order to optimize storage usage.
+
 ## heads
 
 ### Branches

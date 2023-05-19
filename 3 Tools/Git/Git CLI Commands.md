@@ -15,6 +15,9 @@
 * * `git config --global user.email me@mysite.com` - changes the global email to `me@mysite.com`
 * `git init` - sets the working directory up as a Git repo. Creates a `.git` directory within the working directory.
 * `-help` - shows help for the command
+- `git gc` - garbage collect - deletes all uncreachable objects
+* `git prune`  - deletes (prunes) all unreachable objects
+-  - `-n`, `--dry-run` - only displays which objects would be deleted, without actually deleting anything
 
 ## Git areas commands
 - `git status` - shows the active branch, its difference to its remote-tracking branch, its index and working tree
@@ -58,8 +61,6 @@
 * - `-b` - creates the new branch before switching to it
 * - `-f`, `--force` - switches even if there are uncommited changes in the index or the working tree. The uncommited changes get discarded.
 * - `-t`, `--track` - sets the remote tracking reference
-- `git prune` - deletes all unreachable local references
--  - `-n`, `--dry-run` - only displays which refs would be deleted, without actually deleting anything
 
 * `git log` - shows the commit history for the active branch, starting with the latest one (reverse chronological order). Navigate with `arrow up` and `arrow down`. `q` to quit.
 * - `-p, --patch` - shows the differences introduced by each commit
