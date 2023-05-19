@@ -1,6 +1,18 @@
 For documentation, see [Linux terminal documentation](https://linuxcommand.org/lc3_man_page_index.php#text).
 
-### general 
+# `.zshrc`
+
+## Aliases
+
+In the `.zshrc` file in the home directory (`~`), _aliases_ can be defined. 
+
+An alias is a short command that can be called using the given alias name and that will perform the command specified for that alias. 
+
+The syntax for an alias definition is: `alias <alias-name>="<command>"` 
+Example: `alias images="cd ~/Documents/Pictures/My\ pictures"`
+
+After editing the `.zshrc` file (via Vim or Nano or any other text editor), the new alias can be run when a new terminal session start or after reloading the `.zshrc` file with the command `source ~/.zshrc`.
+# general 
 
 * `whoami` - prints the id of the current user (the id is also visible as the first part of the prompt)
 * `ctrl + c` - terminates the running process
@@ -21,15 +33,14 @@ For documentation, see [Linux terminal documentation](https://linuxcommand.org/l
 * * `echo "hello!" >> myfile.txt` - appends *hello!* into *myfile.txt*, creating *myfile.txt* if nonexistent screen)
 * `&&` - the chaining operator can be used to execute multiple commands
 
-
-#### commands used before other commands
+## commands used before other commands
 
 * `sudo` - **super user do** - used before a command to grant administrator privileges to the command 
 * `man` - **manual** - used before a command to open the manual entry for that command
 * * `man ls` - opens the manual entry for the command `ls`
 
 
-### navigation
+# navigation
 
 * `pwd` - **print working directory** - displays the full path of the working directory
 * `ls` - **list** - prints all files and directories in the working directory
@@ -47,7 +58,7 @@ For documentation, see [Linux terminal documentation](https://linuxcommand.org/l
 >[!TIP] File paths starting with `/` are **absolute**, meaning they start from the root directory. All other file paths are **relative**, meaning they start from the working directory.
 >
 
-### file/directory creation & manipulation
+# file/directory creation & manipulation
 
 >[!INFO] All navigation/manipulation/package manager commands are called **within the working directory**
 
@@ -84,7 +95,7 @@ For documentation, see [Linux terminal documentation](https://linuxcommand.org/l
 
 * `pnpm` - package manager that sets up the node packages globally, with only references in the local project directory
 
-### vim
+# vim
 
 docs: https://vim.rtorr.com/
 - `vimtutor` - tutorial for vim
@@ -97,5 +108,5 @@ docs: https://vim.rtorr.com/
 
 
 
-### Git commands
+# Git commands
 ![[Git]]
