@@ -9,10 +9,11 @@
 * 
 * `option/alt+Z`: enable-disable line wrapping
 * 
+* `control + command + L` - select entire line
 * `option/alt+up` / `option/alt+down`: move the entire line up / down
 * `command/ctrl+shift+k`: delete the current line/selection
 * `shift+option/alt+up` /  `shift+option/alt+down`:  copy the current line/selection up / down
-* 
+* `option + command + up` / `option + command + down` - adds a cursor on the line above/below
 * `command + /`: toggle comment on current line/selection
 * `shift+option/alt+A`: toggle comment on selection
 * 

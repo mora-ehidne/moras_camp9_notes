@@ -84,7 +84,7 @@ All the Express HTTP handler methods have two parameters:
 		- `body` - the data of a `POST`/`PATCH`/`PUT` request
 	2. `res` - the response object, with the methods:
 		- `send()` - sends the response to the request back to the client
-		- `status()` - sends the specified [[HTTP#HTTP response status codes|HTTP response status code]] to the client, eg, (`res.status(201)`)
+		- `status()` - sends the specified [[HTTP - Hyper Text Transfer Protocol#HTTP response status codes|HTTP response status code]] to the client, eg, (`res.status(201)`)
 	1. `next` - function that calls the next matching Express method
 
 >[!TIP] The HTTP methods get executed by order of code. The first method that matches the URL and the HTTP request method gets executed. The next matching method can be called with the `next` function.

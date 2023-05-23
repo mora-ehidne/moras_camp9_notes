@@ -1,3 +1,5 @@
+# Mac
+
 `control + space` - switch keyboard language layout (**GB** to **DE** / **DE** to **GB**)
 `option + n` - type a tilde `~`
 `shift + cmd + 4` - snipping tool
@@ -15,3 +17,7 @@
 `option + click on refresh` - shows reload options such as hard reload
 `cmd + left arrow` - page back
 `cmd + right arrow` - page forward
+
+# Obsidian
+
+`shift + command + V` - paste as plain text

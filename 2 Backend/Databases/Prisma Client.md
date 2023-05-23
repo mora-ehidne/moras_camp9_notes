@@ -1,11 +1,20 @@
 # Prisma Client
 
 Prisma client is installed separately from the prisma schema.
-The prisma client can do CRUD operations on the database defined in the Prisma schema.
+The prisma client is used to perform CRUD operations on the database defined in the Prisma schema.
 
 # Setup
 
 `pnpm install @prisma/client`
+
+The Prisma schema must have a generator defined that provides a suitable prisma client (in our case, a JavaScript prisma client).
+
+in the `schema.prisma` file:
+```js
+generator client {
+	provider = "prisma-client-js"
+}
+```
 
 When the Prisma schema gets updated, the Prisma client must be generated again.
 `pnpx prisma generate`
