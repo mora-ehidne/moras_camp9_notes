@@ -121,3 +121,11 @@ DATABASE_URL example:
 
 The `seed.ts` file can generate placeholder data for a database.
 Generating the data defined in `seed.ts` is executed via the command `pnpm prisma db seed`.
+
+# CORS - Cross Origin Resource Sharing
+
+CORS is a security feature that defines which connections are allowed to reach the server. 
+
+It is considered a middleware.
+
+We have used the CORS Node.js package: https://www.npmjs.com/package/cors

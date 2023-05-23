@@ -9,9 +9,9 @@ The backend is in a separate folder from the frontend. All commands are run with
 
 ## Server
 
-We are running a live backend server of our Express framework via nodemon. 
+We are running a live backend server of our Express framework via Node.js and watching it for changes through nodemon. 
 
-We can specify which port nodemon runs on and which script file it loads. 
+We can specify which port nodemon starts the server on and which script file it loads. 
 - port: can be specified in the nodemon command or in the Express `app.listen()` method call (we used `8000`)
 - script: defined in the nodemon command (we used `main.ts`)
 
