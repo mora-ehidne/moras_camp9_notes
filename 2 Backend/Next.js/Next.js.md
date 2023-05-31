@@ -19,17 +19,15 @@ The `/app` folder corresponds to the root directory `/` when routing.
 Example: a URL of `localhost:3000/dashboard/settings` corresponds to the path of `/app/dashboard/settings`.
 A home URL (`localhost:3000/`) corresponds to the path of `/app`.
 
-The component that will be served from the corresponding folder depends on the components present in that folder and the status of the GET request sent to the server.
+What will be served from the corresponding folder depends on the `.tsx` files present in that folder and the status of the GET request.
 
 ![[Next.js_route-segments-to-path-segments.png]]
 
 ## Router Components
 
 There are reserved names for `.tsx` files that get treated specially by the Next.js router.
+One of these files will be served in response to a GET request depending on which one of the files is present in the corresponding folder and the status of the GET request.
 
-Depending on the `.tsx` files present in the corresponding folder and the status of the GET request sent to the server, a specific `.tsx` file will get served. 
-
-Some of these are:
 - `page.tsx` - gets served when the GET request is successful
 - `layout.tsx` - wraps `page.tsx` and can hold additional components. If present, gets served instead of `page.tsx`
 - `error.tsx` - gets served when an error is thrown within the folder
@@ -42,7 +40,7 @@ Some of these are:
 A successful HTTP request renders the `page.tsx` in the directory corresponding to the given URL.
 Going to a page eg. `localhost:3000/contact` would load a `contact.html` page based on the `page.tsx` component in the`/app/contact` directory. 
 
->[!NOTE] The home .html page is `page.tsx` in the `/app` directory (instead of index.html).
+>[!NOTE] In Next.js there is no `main.js` or `index.html`. The `/app/page.tsx` /  `/app/layout.tsx` can be seen as the home page of the entire app.
 
 ### `layout.tsx`
 
@@ -54,12 +52,9 @@ Instead of a `main.js` in React, there is the `/app/layout.tsx` in Next.js.
 Inside of it, the layout of the app can be defined.
 
 >[!WARNING] Layout routing and nesting:
-> `layout.tsx` also gets routed to in order of inheritance - but instead of replacing the inherited ones, they _nest_.
+> `layout.tsx` gets routed to in order of inheritance - the children `layout.tsx` files get nested within their parent `layout.tsx` files.
 > 
-> This means: on `localhost:3000/blog` we will see `/app/blog/page.tsx` rendered within `/app/blog/layout.tsx` rendered within `/app/layout.tsx`.
-
-
-
+> This means: on `localhost:3000/blog` we will get `/app/blog/page.tsx` nested within `/app/blog/layout.tsx` nested within `/app/layout.tsx`.
 
 ### `error.tsx`
 
@@ -71,12 +66,13 @@ Eg. `/app/about/error.tsx` renders when `/app/about/page.tsx` throws an error.
 `loading.tsx` is the component that renders when a page within that directory is still being loaded.
 
 >[!WARNING] `error.tsx` and `loading.tsx` get routed to in order of inheritance:
-> the one that is nearest to the page that is loading/throwing an error will get loading, if it does not exist, the one int the next nearest ancestor directory will be rendered.
+> The one that is nearest in the nesting structure to the page that is loading/throwing an error will get served.
 > 
->This way, the `error.tsx` and `loading.tsx` in the root app folder (`/app`) will render on error for any page that does not have an `error.tsx` / `loading.tsx` in its own folder.
-
+> For example, for an error thrown by `/app/blog/posts/page.tsx`, `/app/blog/posts/error.tsx` will be served. If no `error.tsx` exits within the `/app/blog/posts` folder, the one in the parent directory (`/app/blog`) will be served. If no `error.tsx` exits within that folder, than the one from the parent folder will be served etc. all the way up the nesting structure until finally, `/app/error.tsx` is reached.
 
 # Server and Client Components
+
+Some Next.js components are only available to Server Components and other only to Client Components.
 
 Docs: https://nextjs.org/docs/getting-started/react-essentials
 

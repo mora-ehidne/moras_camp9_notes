@@ -34,6 +34,8 @@ We have also installed the `Prisma` VSCode extension for code highlighting, form
 Prisma has its own language that `.prisma` files use.
 
 `pnpx prisma db push` - updates the database with the model defintion
+`pnpx prisma db push --force-reset` - clears the database before updating it
+
 
 ## `schema.prisma`
 

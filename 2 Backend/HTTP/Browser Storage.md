@@ -1,3 +1,8 @@
+# Cache
+
+Cache stores resources fetched via the HTTP GET method.
+The cache can store files of any type or size.
+
 # Cookies
 
 Cookie is a format for storing small bits of information from the backend in the frontend - in the client's browser.
