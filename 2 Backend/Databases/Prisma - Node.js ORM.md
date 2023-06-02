@@ -122,7 +122,9 @@ DATABASE_URL example:
 ## Seed
 
 The `seed.ts` file can generate placeholder data for a database.
-Generating the data defined in `seed.ts` is executed via the command `pnpm prisma db seed`.
+Generating the data defined in `seed.ts` is executed via the command:
+
+`pnpm prisma db seed`.
 
 # CORS - Cross Origin Resource Sharing
 
