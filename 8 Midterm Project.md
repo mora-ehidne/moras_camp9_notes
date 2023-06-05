@@ -10,6 +10,8 @@
 		 - Favourite Genres is not implemented - maybe remove it
 		 - Toggle Dark/Light - not finished, maybe remove it too (Remove the entire Customization tab?)
 
+-bug fix - ask doug about seatsContext!
+
 ## Deployment
 
 We should be able to deploy on Vercel and use a Vercel database:

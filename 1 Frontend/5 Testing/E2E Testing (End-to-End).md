@@ -9,6 +9,7 @@ E2E Testing tools:
 # Playwright
 
 A Node.js library that automates Firefox, Chromium and other browsers.
+Playwright docs: https://playwright.dev/docs/
 
 ## Setup
 
