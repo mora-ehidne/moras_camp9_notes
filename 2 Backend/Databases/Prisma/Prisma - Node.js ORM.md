@@ -119,12 +119,6 @@ in the `.env` file we have defined a variable of `DATABASE_URL`. That variable i
 DATABASE_URL example: 
 `DATABASE_URL=postgresql://postgres:raf6Xmczwg1A8SaCij@localhost:5432/schema`
 
-## Seed
-
-The `seed.ts` file can generate placeholder data for a database.
-Generating the data defined in `seed.ts` is executed via the command:
-
-`pnpm prisma db seed`.
 
 # CORS - Cross Origin Resource Sharing
 

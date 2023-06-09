@@ -5,7 +5,7 @@ In order to use Vercel cloud databases, a Vercel account has to be created on ve
 
 A Vercel cloud database can be used in a project regardless if the project is deployed as a Vercel project.
 
-## New Vercel Database
+## Vercel Cloud Database
 
 ### Creating a new Vercel Database
 
