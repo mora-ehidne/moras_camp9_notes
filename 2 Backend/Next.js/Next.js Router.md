@@ -79,6 +79,13 @@ Eg. `app/blog/[id]` will correspond to any leaf of the `localhost:3000/blog/` UR
 
 The dynamic route segment (params) can be accessed by a `page` or `layout` through the `params` prop.
 
+Eg: for a `page.tsx` in the folder structure of `app/details/[id]` and a route of `localhost:8000/details/8`:
+```tsx
+function myComponent({params}:{params:{id:string}}){
+	console.log(params.id); //would log 8
+}
+```
+
 The `params` prop has a structure of `{ slug: value}`. That would mean:
 - `app/blog/[id]/page.tsx` file routed to by `localhost:3000/blog/4` would have a `params` prop of `{ id: 4 }`
 - `app/blog/[id]/page.tsx` file routed to by `localhost:3000/blog/something` would have a `params` prop of `{ id: something }`
