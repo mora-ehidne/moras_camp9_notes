@@ -13,7 +13,6 @@ Server components are used for static components.
 
 Unlike Client Components, Server Components can be *async*.
 
-
 ## Client components
 
 Client Components are used for interactive elements of the UI.
@@ -29,3 +28,5 @@ export default function MyButton(){
 	return <button>Click me!</button>
 }
 ```
+
+>[!WARNING] Server and Client components can be nested inside each other. A Client component can have Server components as children and a Server component can have Client components as children.
